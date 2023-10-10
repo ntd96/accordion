@@ -31,6 +31,7 @@
             font-size: 15px;
             transition: 0.4s;
             margin-bottom: 10px;
+            transition: 500ms;
         }
 
         .accordion_content {
@@ -47,12 +48,17 @@
             margin: 0;
             height: 0;
             overflow: hidden;
-            transition: 500ms linear;
+            transition: 500ms;
             padding: 0 20px
         }
 
-        .active,
-        .accordion:hover {
+        .active {
+            height: auto;
+            transition: 500ms;
+        }
+
+
+        .accordion_content:hover {
             background-color: #ccc;
         }
 
@@ -74,10 +80,10 @@
             <h2>Accordion</h2>
 
             <div class="accordion">
-                <div class="accordion_content">What is Lorem Ipsum?
+                <div class="accordion_content ">What is Lorem Ipsum?
                     <div><i class="fa-solid fa-angle-down"></i></div>
                 </div>
-                <p class="accordion_description">
+                <p class="accordion_description active">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
                     and
@@ -138,83 +144,108 @@
 
 
     <script>
-
         const accordions = document.querySelectorAll('.accordion');
         let index = 0;
         let timer = 3000
-        // Func handle toggle current class
-        function toggleAccordion() {
-            accordions.forEach((accordion, indexAcc) => {
-                let content = accordion.querySelector('.accordion_content');
-                let description = accordion.querySelector('.accordion_description');
-                let icon = accordion.querySelector('.fa-angle-down')
-                var progressBars = accordion.querySelector("#myBar");
-
-                content.addEventListener('click', () => {
-                    content.classList.toggle('active');
-                    // width = 1
-                    if (content.classList.contains('active')) {
-                        description.style = `height:${description.scrollHeight}px; margin-top: 10px; padding-bottom: 10px `
-                        icon.style = 'transform: rotate(180deg);'
-                        progressBars.style.display = 'block';
+        contents = document.querySelectorAll('.accordion_content');
+        contents.forEach((content, i) => {
+            content.addEventListener('click', event => showDes(i))
+        })
+        function showDes(i) {
+            accordions.forEach((acc, index) => {
+                let content = acc.querySelector('.accordion_content');
+                let description = acc.querySelector('.accordion_description');
+                description.classList.toggle('active');
+             
+                if (i !== index) {
+                    description.classList.remove('active');
+                    description.style = 'height: 0px';
+                } else {
+                    if (description.classList.contains('active')) {
+                        ;
+                        description.style = `height: auto; margin-top: 10px; padding-bottom: 10px; transition: 500ms; `
                     } else {
-                        description.style = 'height: 0px;'
-                        icon.style = 'transform: rotate(0deg);'
+                        description.style = 'height: 0px; transition: 500ms;';
                     }
-                    // frameAcc(width);
-
-                    removeCurrentAcc(indexAcc)
-
-                })
+                }
             })
         }
-        toggleAccordion()
-      
+
+        // Func handle toggle current class
+        // accordions.forEach((accordion, indexAcc) => {
+        //     let content = accordion.querySelector('.accordion_content');
+        //     let description = accordion.querySelector('.accordion_description');
+        //     let icon = accordion.querySelector('.fa-angle-down')
+        //     let progressBars = accordion.querySelector("#myBar");
+
+        //     content.addEventListener('click', () => {
+        //         content.classList.toggle('active');
+        //         // width = 1
+        //         if (content.classList.contains('active')) {
+        //             description.style = `height:${description.scrollHeight}px; margin-top: 10px; padding-bottom: 10px `
+        //             icon.style = 'transform: rotate(180deg);'
+        //             progressBars.style.display = 'block';
+        //         } else {
+        //             description.style = 'height: 0px;'
+        //             // icon.style = 'transform: rotate(0deg);'
+        //             progressBars.style.display = 'none';
+        //         }
+        //         // frameAcc(width);
+
+        //         removeCurrentAcc(indexAcc)
+
+        //     })
+        // })
+
+
+
 
 
         // Func handle auton toggle
-        function auto() {
-            const loop = setInterval(() => {
-                let accordion = accordions[index]
-                let content = accordion.querySelector('.accordion_content');
-                let description = accordion.querySelector('.accordion_description');
-                let icon = accordion.querySelector('.fa-angle-down')
-                // Progress bar
-                var progressBars = accordion.querySelector("#myBar");
 
 
-                content.classList.toggle('active');
+        // function auto() {
 
-                if (index < accordions.length) {
 
-                    if (content.classList.contains('active')) {
-                        description.style = `height:${description.scrollHeight}px;margin-top: 10px; padding-bottom: 10px`
-                        icon.style = 'transform: rotate(180deg);'
-                        progressBars.style.display = 'block'
-                    } else {
-                        description.style = 'height: 0px';
-                    }
-                    frameAcc()
-                    removeCurrentAcc(index)
-                    index++
-                }
-                if (index === accordions.length) {
-                    index = 0;
-                }
-                if (index === timer) {
-                    clearInterval(loop)
-                }
-            }, timer);
-        }
-        auto();
+        // console.log(accordion);
+        // let loop = setInterval(() => {
+        //     let accordion = accordions[index]
+        //     let content = accordion.querySelector('.accordion_content');
+        //     let description = accordion.querySelector('.accordion_description');
+        //     let icon = accordion.querySelector('.fa-angle-down')
+        //     var progressBars = accordion.querySelector("#myBar");
+
+        //     content.classList.toggle('active');
+
+        //     if (index < accordions.length) {
+
+        //         if (content.classList.contains('active')) {
+        //             description.style = `height:${description.scrollHeight}px;margin-top: 10px; padding-bottom: 10px`
+        //             icon.style = 'transform: rotate(180deg);'
+        //             progressBars.style.display = 'block'
+        //         } else {
+        //             description.style = 'height: 0px';
+        //         }
+        //         removeCurrentAcc(index)
+        //         index++
+        //     }
+        //     if (index === accordions.length) {
+        //         index = 0;
+        //     }
+        //     if (index === timer) {
+        //         clearInterval(loop)
+        //     }
+        // }, timer, false);
+
+        // auto();
 
         // Func frame progress bar time
         function frameAcc() {
             let accordion = accordions[index]
             // Progress bar
             var progressBars = accordion.querySelector("#myBar");
-            var width = 1 
-            var calc = width/100 * timer
+            var width = 1
+            var calc = width / 100 * timer
             var id = setInterval(frame, calc);
             function frame() {
                 if (width >= 100) {
@@ -227,9 +258,10 @@
             }
         }
 
+        // Func remove old class
+        function removeCurrentAcc(indexAcc) {
+            const accordions = document.querySelectorAll('.accordion');
 
-          // Func remove old class
-          function removeCurrentAcc(indexAcc) {
             accordions.forEach((acc, i) => {
                 let content = acc.querySelector('.accordion_content');
                 let description = acc.querySelector('.accordion_description');
@@ -239,7 +271,7 @@
                 if (indexAcc !== i) {
                     content.classList.remove('active')
                     description.style = 'height: 0px'
-                    progressBars.style.display = 'none';
+                    progressBars.style.display = 'none'
                     icon.style = 'transform: rotate(0deg);'
                 }
             })
