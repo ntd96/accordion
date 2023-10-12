@@ -31,13 +31,13 @@
             font-size: 15px;
             transition: 0.4s;
             margin-bottom: 10px;
-            transition: 500ms;
         }
 
         .accordion_content {
             display: flex;
             justify-content: space-between;
             padding: 10px 20px;
+
         }
 
         .fa-angle-down {
@@ -45,16 +45,20 @@
         }
 
         .accordion_description {
-            margin: 0;
-            height: 0;
-            overflow: hidden;
             transition: 500ms;
-            padding: 0px 20px
+            max-height: 0;
+            overflow: hidden;
+            padding: 0px 20px;
+            opacity: 0;
+            margin: 0;
         }
 
-        .active {
-            height: auto;
-            transition: 500ms;
+        .activeDes {
+            transition: 2s;
+            max-height: 150px;
+            padding: 0px 20px;
+            opacity: 1;
+
         }
 
 
@@ -71,11 +75,15 @@
             border-radius: 100px;
             align-items: center;
             position: relative;
-            /* padding: 0 5px; */
-            display: flex;
-            /* height: 40px; */
-            width: 100%;
             display: none;
+            width: 100%;
+
+        }
+
+        .progressActive {
+            display: flex;
+            /* transition: 2s; */
+
         }
 
         .progress-value {
@@ -84,10 +92,7 @@
             border-radius: 100px;
             background: #180c0c;
             height: 10px;
-            /* width: 0; */
-            
         }
-
         @keyframes load {
             0% {
                 width: 0;
@@ -173,164 +178,81 @@
         </div>
     </div>
 
-
-
-
-
     <script>
-        // const accordions = document.querySelectorAll('.accordion');
-        // let index = 0;
 
-        // contents = document.querySelectorAll('.accordion_content');
-        // contents.forEach((content, i) => {
-        //     content.addEventListener('click', event => setInterval(showDes(i)), 5000)
-        // })
-        setInterval(() => {
-            showDes();
-        }, 3000); 
-        // function showDes(i) {
-        //     console.log(i);
-        //     accordions.forEach((acc, index) => {
-        //         let content = acc.querySelector('.accordion_content');
-        //         let description = acc.querySelector('.accordion_description');
-        //         let progressBars = acc.querySelector(".progress");
-        //         let icon = acc.querySelector('.fa-angle-down')
 
-        //         content.classList.toggle('active');
 
-        //         if (i !== index) {
-        //             content.classList.remove('active');
-        //             description.style = 'height: 0px';
-                    
-        //         } else {
-        //             if (content.classList.contains('active')) {
-        //                 description.style = `height:${description.scrollHeight}px; margin-top: 10px; padding-bottom: 10px;`
-        //                 progressBars.style.display = 'block';
-        //                 icon.style = 'transform: rotate(180deg);'
-
-        //             } else {
-        //                 description.style = 'height: 0px';
-        //                 icon.style = 'transform: rotate(0deg);'
-        //                 progressBars.style = 'none; animation-duration: 3s;';
-
-        //             }
-        //         }
-        //     })
-        // }
-      
-           
 
         // Click toggle
-        function showDes() {
-            const accordions = document.querySelectorAll('.accordion');
+        const accordions = document.querySelectorAll('.accordion');
+        let timer = 3000
+        // let index = 0
+        let timeProgress =
+            // Hàm click Toggle
+            accordions.forEach((a, i) => {
+                let button = a.querySelector('.accordion_content')
+                button.addEventListener('click', () => {
 
-            accordions.forEach((accordion, indexAcc) => {
-            let content = accordion.querySelector('.accordion_content');
-            let description = accordion.querySelector('.accordion_description');
-            let icon = accordion.querySelector('.fa-angle-down')
-            let progressBars = accordion.querySelector(".progress");
-            let progressBarsValue = accordion.querySelector(".progress-value");
-
-                content.addEventListener('click', () => {
-                    content.classList.toggle('active');
-                    // width = 1
-                    if (content.classList.contains('active')) {
-                        description.style = `height:${description.scrollHeight}px; margin-top: 10px; padding-bottom: 10px `
-                        icon.style = 'transform: rotate(180deg);'
-                        progressBars.style.display = 'block';
-                    } else {
-                        description.style = 'height: 0px;'
-                        // icon.style = 'transform: rotate(0deg);'
-                        progressBars.style.display = 'none';
-                    }
-                    // frameAcc(width);
-
-
-                    removeCurrentAcc(indexAcc)
+                    toggle(i)
                 })
             })
-        }
-        
-         // Func remove old class
-        function removeCurrentAcc(indexAcc) {
-            const accordions = document.querySelectorAll('.accordion');
 
+
+        function toggle(i) {
+            console.log(i);
+            accordions.forEach((a, index) => {
+                let button = a.querySelector('.accordion_content');
+                let description = a.querySelector('.accordion_description');
+                let icon = a.querySelector('.fa-angle-down');
+                let progressBars = a.querySelector(".progress");
+                // Toggle
+                if (i === index) {
+                    description.classList.toggle('activeDes');
+                    progressBars.classList.toggle('progressActive');
+                } else {
+                    removeCurrentAcc(i)
+                }
+            })
+            // let loop = setInterval( () => next(i) , timer);
+        }
+        // Func remove old class
+        function removeCurrentAcc(indexAcc) {
             accordions.forEach((acc, i) => {
-                let content = acc.querySelector('.accordion_content');
                 let description = acc.querySelector('.accordion_description');
-                var progressBars = acc.querySelector(".progress");
-                let icon = acc.querySelector('.fa-angle-down')
+                let progressBars = acc.querySelector(".progress");
+
                 if (indexAcc !== i) {
-                    content.classList.remove('active')
-                    description.style = 'height: 0px'
-                    progressBars.style.display = 'none'
-                    icon.style = 'transform: rotate(0deg);'
-                  
+                    description.classList.remove('activeDes')
+                    progressBars.classList.remove('progressActive')
+
                 }
             })
         }
 
-        // window.addEventListener('load', () => {
-        //     // Func handle toggle current class
-        //     let accs = document.querySelectorAll('.accordion');
-        //     accs[0].querySelector('.accordion_content').classList.toggle('active')
-        //     accs[0].querySelector('.accordion_description').style = `height:auto;`
-        //     accs[0].querySelector('.progress').style.display = 'block';
-        //     auto();
-        // })
+        // Automatic loop
+        let index = 0
+        let loop = setInterval(() => {
 
-        let timer = 3000
-
-        // console.log(accordion);
-        // let loop = setInterval(() => {
-        //     let accordion = accordions[index]
-        //     let content = accordion.querySelector('.accordion_content');
-        //     let description = accordion.querySelector('.accordion_description');
-        //     let icon = accordion.querySelector('.fa-angle-down')
-        //     var progressBars = accordion.querySelector(".progress");
-        //     content.classList.toggle('active');
-        //     if (index < accordions.length) {
-        //         if (content.classList.contains('active')) {
-        //             description.style = `height:${description.scrollHeight}px;margin-top: 10px; padding-bottom: 10px`
-        //             icon.style = 'transform: rotate(180deg);'
-        //             progressBars.style.display = 'block'
-        //         } else {
-        //             description.style = 'height: 0px';
-        //         }
-        //         removeCurrentAcc(index)
-                
-        //         index++
-        //     }
-        //     if (index >= accordions.length) {
-        //         index = 0;
-        //     }
-        //     if (index === timer) {
-        //         clearInterval(loop)
-        //     }
-        // }, timer);
+            let accordion = accordions[index]
+            let button = accordion.querySelector('.accordion_content');
+            let description = accordion.querySelector('.accordion_description');
+            let icon = accordion.querySelector('.fa-angle-down');
+            let progressBars = accordion.querySelector(".progress");
+            // Toggle
+                description.classList.toggle('activeDes');
+                progressBars.classList.toggle('progressActive');
 
 
-
-        // Func frame progress bar time
-        // function frameAcc() {
-        //     let accordion = accordions[index]
-        //     // Progress bar
-        //     var progressBars = accordion.querySelector("#myBar");
-        //     var width = 1
-        //     var calc = width / 100 * timer
-        //     var id = setInterval(frame, calc);
-        //     function frame() {
-        //         if (width >= 100) {
-        //             clearInterval(id);
-        //             i = 0;
-        //         } else {
-        //             width++;
-        //             progressBars.style.width = width + "%";
-        //         }
-        //     }
-        // }
-
-       
+                removeCurrentAcc(index)
+                index++
+            
+            if (index >= accordions.length) {
+                index = 0;
+            }
+            if (index === timer) {
+                clearInterval(loop)
+            }
+        }, timer);
 
     </script>
 
