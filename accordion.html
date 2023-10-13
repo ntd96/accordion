@@ -1,261 +1,263 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/9a811ce03d.js" crossorigin="anonymous"></script>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/9a811ce03d.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
-        .container {
-            width: 100%;
-            display: flex;
+      .container {
+        width: 100%;
+        display: flex;
+      }
+
+      .container_image {
+        width: 50%;
+        text-align: center;
+      }
+
+      .container_accordion {
+        width: 50%;
+      }
+
+      .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        /* padding: 0px 20px; */
+        /* width: 100%; */
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        margin-bottom: 10px;
+      }
+
+      .accordion_content {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+      }
+
+      .fa-angle-down {
+        transition: 500ms;
+      }
+
+      .accordion_description {
+        transition: 500ms;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0px 20px;
+        opacity: 0;
+        margin: 0;
+      }
+
+      .activeDes {
+        transition: 2s;
+        max-height: 150px;
+        padding: 0px 20px;
+        opacity: 1;
+      }
+
+      .accordion_content:hover {
+        background-color: #ccc;
+      }
+
+      /*  framke progress bar */
+      .progress {
+        background: rgba(255, 255, 255, 0.1);
+        justify-content: flex-start;
+        border-radius: 100px;
+        align-items: center;
+        position: relative;
+        display: none;
+        width: 100%;
+      }
+
+      .progressActive {
+        display: flex;
+        /* transition: 2s; */
+      }
+
+      .progress-value {
+        animation: load 9s;
+        box-shadow: 0 10px 40px -10px #fff;
+        border-radius: 100px;
+        background: #180c0c;
+        height: 10px;
+      }
+      @keyframes load {
+        0% {
+          width: 0;
         }
 
-        .container_image {
-            width: 50%;
-            text-align: center;
+        100% {
+          width: 100%;
         }
-
-        .container_accordion {
-            width: 50%
-        }
-
-        .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            /* padding: 0px 20px; */
-            /* width: 100%; */
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s;
-            margin-bottom: 10px;
-        }
-
-        .accordion_content {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-
-        }
-
-        .fa-angle-down {
-            transition: 500ms;
-        }
-
-        .accordion_description {
-            transition: 500ms;
-            max-height: 0;
-            overflow: hidden;
-            padding: 0px 20px;
-            opacity: 0;
-            margin: 0;
-        }
-
-        .activeDes {
-            transition: 2s;
-            max-height: 150px;
-            padding: 0px 20px;
-            opacity: 1;
-
-        }
-
-
-        .accordion_content:hover {
-            background-color: #ccc;
-        }
-
-
-
-        /*  framke progress bar */
-        .progress {
-            background: rgba(255, 255, 255, 0.1);
-            justify-content: flex-start;
-            border-radius: 100px;
-            align-items: center;
-            position: relative;
-            display: none;
-            width: 100%;
-
-        }
-
-        .progressActive {
-            display: flex;
-            /* transition: 2s; */
-
-        }
-
-        .progress-value {
-            animation: load 3s;
-            box-shadow: 0 10px 40px -10px #fff;
-            border-radius: 100px;
-            background: #180c0c;
-            height: 10px;
-        }
-        @keyframes load {
-            0% {
-                width: 0;
-            }
-
-            100% {
-                width: 100%;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="container_image">
-            <img src="https://v2.smartr.co/wp-content/uploads/2023/09/miquel-parera-41J9-JTIP-c-unsplash-1.jpg" alt="">
+      <div class="container_image">
+        <img
+          src="https://v2.smartr.co/wp-content/uploads/2023/09/miquel-parera-41J9-JTIP-c-unsplash-1.jpg"
+          alt=""
+        />
+      </div>
+      <div class="container_accordion">
+        <h2>Accordion</h2>
+        <div class="accordion">
+          <div class="accordion_content">
+            What is Lorem Ipsum?
+            <div><i class="fa-solid fa-angle-down"></i></div>
+          </div>
+          <p class="accordion_description">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum..
+          </p>
+          <div class="progress">
+            <div class="progress-value"></div>
+          </div>
         </div>
-        <div class="container_accordion">
-            <h2>Accordion</h2>
-
-            <div class="accordion">
-                <div class="accordion_content">What is Lorem Ipsum?
-                    <div><i class="fa-solid fa-angle-down"></i></div>
-                </div>
-                <p class="accordion_description">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                    the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing
-                    software like Aldus PageMaker including versions of Lorem Ipsum..
-                </p>
-                <div class="progress">
-                    <div class="progress-value"></div>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion_content">Why do we use it?
-                    <div><i class="fa-solid fa-angle-down"></i></div>
-                </div>
-                <p class="accordion_description">
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution
-                    of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                    Many
-                    desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,
-                    and a
-                    search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
-                    evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)..
-                </p>
-                <div class="progress">
-                    <div class="progress-value"></div>
-                </div>
-
-            </div>
-            <div class="accordion">
-                <div class="accordion_content">Why do we use it?
-                    <div><i class="fa-solid fa-angle-down"></i></div>
-                </div>
-                <p class="accordion_description">
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution
-                    of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                    Many
-                    desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,
-                    and a
-                    search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
-                    evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)..
-                </p>
-                <div class="progress">
-                    <div class="progress-value"></div>
-                </div>
-
-            </div>
+        <div class="accordion">
+          <div class="accordion_content">
+            Why do we use it?
+            <div><i class="fa-solid fa-angle-down"></i></div>
+          </div>
+          <p class="accordion_description">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a more-or-less normal
+            distribution of letters, as opposed to using 'Content here, content
+            here', making it look like readable English. Many desktop publishing
+            packages and web page editors now use Lorem Ipsum as their default
+            model text, and a search for 'lorem ipsum' will uncover many web
+            sites still in their infancy. Various versions have evolved over the
+            years, sometimes by accident, sometimes on purpose (injected humour
+            and the like)..
+          </p>
+          <div class="progress">
+            <div class="progress-value"></div>
+          </div>
         </div>
+        <div class="accordion">
+          <div class="accordion_content">
+            Why do we use it?
+            <div><i class="fa-solid fa-angle-down"></i></div>
+          </div>
+          <p class="accordion_description">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a more-or-less normal
+            distribution of letters, as opposed to using 'Content here, content
+            here', making it look like readable English. Many desktop publishing
+            packages and web page editors now use Lorem Ipsum as their default
+            model text, and a search for 'lorem ipsum' will uncover many web
+            sites still in their infancy. Various versions have evolved over the
+            years, sometimes by accident, sometimes on purpose (injected humour
+            and the like)..
+          </p>
+          <div class="progress">
+            <div class="progress-value"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
+      const accordions = document.querySelectorAll(".accordion");
+      let intervalId;
+      let timeoutId;
+      let initialIndex = 0;
+      let timer = 9000;
+      let isOccurredEvent = false;
 
+      function toggle(currentIndex) {
+        accordions.forEach((accordion, previousIndex) => {
+          const description = accordion.querySelector(".accordion_description");
+          const progressBars = accordion.querySelector(".progress");
 
+          if (currentIndex !== previousIndex) {
+            removeCurrentAccordion(previousIndex);
+          } else {
+            description.classList.toggle("activeDes");
+            progressBars.classList.toggle("progressActive");
+            isOccurredEvent = true;
+            const nextIndex =
+              currentIndex >= accordions.length - 1 ? 0 : currentIndex + 1;
+            autoAnimateProgress(nextIndex);
+          }
+        });
+      }
 
+      function removeCurrentAccordion(currentIndex) {
+        const description = accordions[currentIndex].querySelector(
+          ".accordion_description"
+        );
+        const progressBars =
+          accordions[currentIndex].querySelector(".progress");
 
-        // Click toggle
-        const accordions = document.querySelectorAll('.accordion');
-        let timer = 3000
-        // let index = 0
-        let timeProgress =
-            // Hàm click Toggle
-            accordions.forEach((a, i) => {
-                let button = a.querySelector('.accordion_content')
-                button.addEventListener('click', () => {
+        description.classList.remove("activeDes");
+        progressBars.classList.remove("progressActive");
+      }
 
-                    toggle(i)
-                })
-            })
+      function autoAnimateProgress(index) {
+        clearInterval(intervalId);
+        clearTimeout(timeoutId);
 
+        intervalId = setInterval(() => {
+          if (isOccurredEvent) {
+            let previousIndex = index === 0 ? accordions.length : index;
 
-        function toggle(i) {
-            console.log(i);
-            accordions.forEach((a, index) => {
-                let button = a.querySelector('.accordion_content');
-                let description = a.querySelector('.accordion_description');
-                let icon = a.querySelector('.fa-angle-down');
-                let progressBars = a.querySelector(".progress");
-                // Toggle
-                if (i === index) {
-                    description.classList.toggle('activeDes');
-                    progressBars.classList.toggle('progressActive');
-                } else {
-                    removeCurrentAcc(i)
-                }
-            })
-            // let loop = setInterval( () => next(i) , timer);
-        }
-        // Func remove old class
-        function removeCurrentAcc(indexAcc) {
-            accordions.forEach((acc, i) => {
-                let description = acc.querySelector('.accordion_description');
-                let progressBars = acc.querySelector(".progress");
+            accordions[previousIndex - 1]
+              .querySelector(".accordion_description")
+              .classList.toggle("activeDes");
+            accordions[previousIndex - 1]
+              .querySelector(".progress")
+              .classList.toggle("progressActive");
 
-                if (indexAcc !== i) {
-                    description.classList.remove('activeDes')
-                    progressBars.classList.remove('progressActive')
+            isOccurredEvent = false;
+          }
 
-                }
-            })
-        }
+          const currentIndex = index;
+          const description = accordions[index].querySelector(
+            ".accordion_description"
+          );
+          const progressBars = accordions[index].querySelector(".progress");
 
-        // Automatic loop
-        let index = 0
-        let loop = setInterval(() => {
+          description.classList.toggle("activeDes");
+          progressBars.classList.toggle("progressActive");
 
-            let accordion = accordions[index]
-            let button = accordion.querySelector('.accordion_content');
-            let description = accordion.querySelector('.accordion_description');
-            let icon = accordion.querySelector('.fa-angle-down');
-            let progressBars = accordion.querySelector(".progress");
-            // Toggle
-                description.classList.toggle('activeDes');
-                progressBars.classList.toggle('progressActive');
+          index++;
 
-
-                removeCurrentAcc(index)
-                index++
-            
-            if (index >= accordions.length) {
-                index = 0;
+          setTimeout(() => {
+            if (currentIndex !== index) {
+              removeCurrentAccordion(currentIndex);
             }
-            if (index === timer) {
-                clearInterval(loop)
-            }
+            if (index >= accordions.length) index = 0;
+          }, timer);
         }, timer);
+      }
 
+      accordions.forEach((accordion, i) => {
+        const button = accordion.querySelector(".accordion_content");
+        button.addEventListener("click", function () {
+          toggle(i);
+        });
+      });
+
+      autoAnimateProgress(initialIndex);
     </script>
-
-</body>
-
+  </body>
 </html>
