@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .container-accordion {
+            display: flex;
+            max-width: 1600px;
+            margin: auto;
+        }
+
         .accordion {
-            width: 90%;
+            width: 50%;
             max-width: 1000px;
             margin: 2rem auto;
         }
@@ -76,25 +82,28 @@
             height: 100%;
             width: 0;
             background-color: #2c3e50;
-            animation: progress 5s linear infinite;
+            animation: progress 5s linear;
         }
 
         @keyframes progress {
             0% {
                 width: 0;
             }
+
             100% {
                 width: 100%;
             }
         }
 
         /* Custom thêm */
+        .external-image-container {
+            width: 45%;
+        }
+
         .external-image-container img {
             width: 100%;
             visibility: hidden;
-            /* Ẩn ban đầu */
             opacity: 0;
-            /* Ẩn ban đầu */
             transition: 0.3s ease-in-out, visibility 0.3s ease-in-out;
             border-radius: 0.5rem;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
@@ -103,7 +112,6 @@
         .external-image-container img.active {
             visibility: visible;
             opacity: 1;
-            /* Hiển thị với opacity 1 */
             transition: 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
 
@@ -119,63 +127,86 @@
 <body>
 
     <h1>FAQ</h1>
+    <div class="container-accordion">
+        <div class="external-image-container">
+            <!-- Hình ảnh sẽ được thay đổi ở đây -->
+            <img src="https://imed.com.vn/wp-content/uploads/2024/01/image-34.jpeg" alt="Accordion Image">
+        </div>
 
-    <div class="external-image-container">
-        <!-- Hình ảnh sẽ được thay đổi ở đây -->
-        <img src="https://imed.com.vn/wp-content/uploads/2024/01/image-34.jpeg" alt="Accordion Image">
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-item"
-            data-image="https://imed.com.vn/wp-content/uploads/2024/01/Giai-phap-chuan-doan-va-dieu-tri-ung-thu.jpeg">
-            <div class="accordion-item-header">
-                What is Web Development?
-            </div>
-            <div class="accordion-item-body">
-                <div class="accordion-item-body-content">
-                    Web Development broadly refers to the tasks associated with developing functional websites and
-                    applications for the Internet. The web development process includes web design, web content
-                    development, client-side/server-side scripting and network security configuration, among other
-                    tasks.
+        <div class="accordion">
+            <div class="accordion-item"
+                data-image="https://imed.com.vn/wp-content/uploads/2024/01/Giai-phap-chuan-doan-va-dieu-tri-ung-thu.jpeg">
+                <div class="accordion-item-header">
+                    What is Web Development?
                 </div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar"></div>
+                <div class="accordion-item-body">
+                    <div class="accordion-item-body-content">
+                        Web Development broadly refers to the tasks associated with developing functional websites and
+                        applications for the Internet. The web development process includes web design, web content
+                        development, client-side/server-side scripting and network security configuration, among other
+                        tasks.
+                    </div>
+                    <!-- <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="accordion-item" data-image="https://imed.com.vn/wp-content/uploads/2024/01/image-35.jpg">
+                <div class="accordion-item-header">
+                    What is Web Design?
+                </div>
+                <div class="accordion-item-body">
+                    <div class="accordion-item-body-content">
+                        Web Design encompasses various skills and disciplines in the production and maintenance of
+                        websites. It includes web graphic design, interface design, authoring, including standardized
+                        code and proprietary software, user experience design, and search engine optimization.
+                    </div>
+                    <!-- <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="accordion-item" data-image="https://imed.com.vn/wp-content/uploads/2024/01/image-35.jpg">
+                <div class="accordion-item-header">
+                    What is Web Design?
+                </div>
+                <div class="accordion-item-body">
+                    <div class="accordion-item-body-content">
+                        Web Design encompasses various skills and disciplines in the production and maintenance of
+                        websites. It includes web graphic design, interface design, authoring, including standardized
+                        code and proprietary software, user experience design, and search engine optimization.
+                    </div>
+                    <!-- <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div> -->
                 </div>
             </div>
         </div>
-
-        <div class="accordion-item" data-image="https://imed.com.vn/wp-content/uploads/2024/01/image-35.jpg">
-            <div class="accordion-item-header">
-                What is Web Design?
-            </div>
-            <div class="accordion-item-body">
-                <div class="accordion-item-body-content">
-                    Web Design encompasses various skills and disciplines in the production and maintenance of websites.
-                    It includes web graphic design, interface design, authoring, including standardized code and
-                    proprietary software, user experience design, and search engine optimization.
-                </div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar"></div>
-                </div>
-            </div>
-        </div>
     </div>
+
 
     <script>
         const accordions = document.querySelectorAll(".accordion-item-header");
         const externalImageContainer = document.querySelector(".external-image-container img");
         let autoSwitchInterval; // Biến để lưu đối tượng interval
-
+        let timer = 5000
         // Sử lí sự kiện
         accordions.forEach(item => {
             item.addEventListener("click", (e) => {
-                toggleAccordion(item);
-                clearInterval(autoSwitchInterval); // Dừng bộ đếm khi người dùng thao tác
-                autoSwitchInterval = setInterval(() => {
-                    const activeItem = document.querySelector(".accordion-item.active");
-                    const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
-                    toggleAccordion(nextItem.querySelector(".accordion-item-header"));
-                }, 5000);
+                const activeItem = document.querySelector(".accordion-item.active");
+                console.log('ngoài hàm if', autoSwitchInterval);
+                if (!activeItem || activeItem !== item.parentElement) {
+                    toggleAccordion(item);
+                    clearInterval(autoSwitchInterval);
+                    autoSwitchInterval = setInterval(() => {
+                        console.log('tự động chuyển do click');
+                        const activeItem = document.querySelector(".accordion-item.active");
+                        const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
+                        toggleAccordion(nextItem.querySelector(".accordion-item-header"));
+                    }, timer);
+                }
             });
         });
 
@@ -187,38 +218,46 @@
             const activeItem = document.querySelector(".accordion-item.active");
             const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
             toggleAccordion(nextItem.querySelector(".accordion-item-header"));
-        }, 5000);
+        }, timer);
 
         function toggleAccordion(item) {
             const activeItem = document.querySelector(".accordion-item.active");
+
+            // Kiểm tra xem item được click có đang active không
             if (activeItem && activeItem !== item.parentElement) {
                 activeItem.classList.toggle("active");
                 activeItem.querySelector('.accordion-item-body').style.maxHeight = 0;
-                resetProgressBar(activeItem);
+                // resetProgressBar(activeItem);
             }
 
-            item.parentElement.classList.toggle("active");
-            const accordionItemBody = item.parentElement.querySelector('.accordion-item-body');
-            const progressBar = accordionItemBody.querySelector('.progress-bar');
-            const accordionItemImage = item.parentElement.dataset.image;
+            const isItemActive = item.parentElement.classList.contains("active");
 
-            if (item.parentElement.classList.contains("active")) {
-                accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
-                showImage(accordionItemImage);
-                resetProgressBar(item.parentElement);
-                startProgressBar(progressBar);
-            } else {
-                accordionItemBody.style.maxHeight = 0;
-                hideImage();
+            // Nếu item không active thì mới thực hiện các thay đổi
+            if (!isItemActive) {
+                item.parentElement.classList.toggle("active");
+                const accordionItemBody = item.parentElement.querySelector('.accordion-item-body');
+                const progressBar = accordionItemBody.querySelector('.progress-bar');
+                const accordionItemImage = item.parentElement.dataset.image;
+
+                if (item.parentElement.classList.contains("active")) {
+                    accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+                    showImage(accordionItemImage);
+                    // resetProgressBar(item.parentElement);
+                    // startProgressBar(progressBar);
+                } else {
+                    accordionItemBody.style.maxHeight = 0;
+                    hideImage();
+                }
             }
         }
+
 
         function showImage(imageUrl) {
             externalImageContainer.style.opacity = 0;
             setTimeout(function () {
                 externalImageContainer.src = imageUrl;
                 externalImageContainer.style = 'opacity: 1; visibility:visible ';
-            }, 300);
+            }, 100);
         }
 
         function hideImage() {
@@ -226,19 +265,19 @@
             setTimeout(function () {
                 externalImageContainer.src = "https://imed.com.vn/wp-content/uploads/2024/01/image-34.jpeg";
                 externalImageContainer.style.opacity = 1;
-            }, 300);
+            }, 100);
         }
 
-        function resetProgressBar(item) {
-            const progressBar = item.querySelector('.progress-bar');
-            progressBar.style.width = '0';
-            progressBar.style.animation = 'none'; // Dừng animation
-        }
+        // function resetProgressBar(item) {
+        //     const progressBar = item.querySelector('.progress-bar');
+        //     progressBar.style.width = '0';
+        //     progressBar.style.animation = 'none'; // Dừng animation
+        // }
 
-        function startProgressBar(progressBar) {
-            progressBar.style.width = '0'; // Reset progress bar width to 0
-            progressBar.style.animation = 'progress 5s linear infinite'; // Restart the animation
-        }
+        // function startProgressBar(progressBar) {
+        //     progressBar.style.width = '0'; // Reset progress bar width to 0
+        //     progressBar.style.animation = 'progress 5s linear infinite'; // Restart the animation
+        // }
 
     </script>
 
