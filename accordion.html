@@ -1,262 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://kit.fontawesome.com/9a811ce03d.js" crossorigin="anonymous"></script>
-  <style>
-    .container {
-      width: 100%;
-      display: flex;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .accordion {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
 
-    .container_image {
-      width: 50%;
-      text-align: center;
-    }
+        .accordion-item {
+            background-color: #fff;
+            color: #111;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
 
-    .container_accordion {
-      width: 50%;
-    }
+        .accordion-item-header {
+            padding: 0.5rem 3rem 0.5rem 1rem;
+            min-height: 3.5rem;
+            line-height: 1.25rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
 
-    .accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      /* padding: 0px 20px; */
-      /* width: 100%; */
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      transition: 0.4s;
-      margin-bottom: 10px;
-    }
+        .accordion-item-header::after {
+            content: "\002B";
+            font-size: 2rem;
+            position: absolute;
+            right: 1rem;
+        }
 
-    .accordion_content {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
+        .accordion-item-header.active::after {
+            content: "\2212";
+        }
 
-    .fa-angle-down {
-      transition: 500ms;
-    }
+        .accordion-item-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
 
-    .accordion_description {
-      transition: 500ms;
-      max-height: 0;
-      overflow: hidden;
-      padding: 0px 20px;
-      opacity: 0;
-      margin: 0;
-    }
+        .accordion-item-body-content {
+            padding: 1rem;
+            line-height: 1.5rem;
+            border-top: 1px solid;
+            border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+            width: 100%;
+            position: relative;
+        }
 
-    .activeDes {
-      transition: 2s;
-      max-height: 150px;
-      padding: 0px 20px;
-      opacity: 1;
-    }
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #3498db;
+            overflow: hidden;
+        }
 
-    .accordion_content:hover {
-      background-color: #ccc;
-    }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #2c3e50;
+            animation: progress 5s linear infinite;
+        }
 
-    /*  framke progress bar */
-    .progress {
-      background: rgba(255, 255, 255, 0.1);
-      justify-content: flex-start;
-      border-radius: 100px;
-      align-items: center;
-      position: relative;
-      display: none;
-      width: 100%;
-    }
+        @keyframes progress {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
 
-    .progressActive {
-      display: flex;
-      /* transition: 2s; */
-    }
+        /* Custom thêm */
+        .external-image-container img {
+            width: 100%;
+            visibility: hidden;
+            /* Ẩn ban đầu */
+            opacity: 0;
+            /* Ẩn ban đầu */
+            transition: 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+        }
 
-    .progress-value {
-      animation: load 9s;
-      box-shadow: 0 10px 40px -10px #fff;
-      border-radius: 100px;
-      background: #180c0c;
-      height: 10px;
-    }
+        .external-image-container img.active {
+            visibility: visible;
+            opacity: 1;
+            /* Hiển thị với opacity 1 */
+            transition: 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
 
-    @keyframes load {
-      0% {
-        width: 0;
-      }
-
-      100% {
-        width: 100%;
-      }
-    }
-  </style>
+        @media (max-width: 767px) {
+            html {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <title>Accordion with External Image Container</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="container_image">
-      <img src="https://v2.smartr.co/wp-content/uploads/2023/09/miquel-parera-41J9-JTIP-c-unsplash-1.jpg" alt="" />
+
+    <h1>FAQ</h1>
+
+    <div class="external-image-container">
+        <!-- Hình ảnh sẽ được thay đổi ở đây -->
+        <img src="https://imed.com.vn/wp-content/uploads/2024/01/image-34.jpeg" alt="Accordion Image">
     </div>
-    <div class="container_accordion">
-      <h2>Accordion</h2>
-      <div class="accordion">
-        <div class="accordion_content">
-          What is Lorem Ipsum?
-          <div><i class="fa-solid fa-angle-down"></i></div>
+
+    <div class="accordion">
+        <div class="accordion-item"
+            data-image="https://imed.com.vn/wp-content/uploads/2024/01/Giai-phap-chuan-doan-va-dieu-tri-ung-thu.jpeg">
+            <div class="accordion-item-header">
+                What is Web Development?
+            </div>
+            <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+                    Web Development broadly refers to the tasks associated with developing functional websites and
+                    applications for the Internet. The web development process includes web design, web content
+                    development, client-side/server-side scripting and network security configuration, among other
+                    tasks.
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
         </div>
-        <p class="accordion_description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text
-          ever since the 1500s, when an unknown printer took a galley of type
-          and scrambled it to make a type specimen book. It has survived not
-          only five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s
-          with the release of Letraset sheets containing Lorem Ipsum passages,
-          and more recently with desktop publishing software like Aldus
-          PageMaker including versions of Lorem Ipsum..
-        </p>
-        <div class="progress">
-          <div class="progress-value"></div>
+
+        <div class="accordion-item" data-image="https://imed.com.vn/wp-content/uploads/2024/01/image-35.jpg">
+            <div class="accordion-item-header">
+                What is Web Design?
+            </div>
+            <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+                    Web Design encompasses various skills and disciplines in the production and maintenance of websites.
+                    It includes web graphic design, interface design, authoring, including standardized code and
+                    proprietary software, user experience design, and search engine optimization.
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion_content">
-          Why do we use it?
-          <div><i class="fa-solid fa-angle-down"></i></div>
-        </div>
-        <p class="accordion_description">
-          It is a long established fact that a reader will be distracted by
-          the readable content of a page when looking at its layout. The point
-          of using Lorem Ipsum is that it has a more-or-less normal
-          distribution of letters, as opposed to using 'Content here, content
-          here', making it look like readable English. Many desktop publishing
-          packages and web page editors now use Lorem Ipsum as their default
-          model text, and a search for 'lorem ipsum' will uncover many web
-          sites still in their infancy. Various versions have evolved over the
-          years, sometimes by accident, sometimes on purpose (injected humour
-          and the like)..
-        </p>
-        <div class="progress">
-          <div class="progress-value"></div>
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="accordion_content">
-          Why do we use it?
-          <div><i class="fa-solid fa-angle-down"></i></div>
-        </div>
-        <p class="accordion_description">
-          It is a long established fact that a reader will be distracted by
-          the readable content of a page when looking at its layout. The point
-          of using Lorem Ipsum is that it has a more-or-less normal
-          distribution of letters, as opposed to using 'Content here, content
-          here', making it look like readable English. Many desktop publishing
-          packages and web page editors now use Lorem Ipsum as their default
-          model text, and a search for 'lorem ipsum' will uncover many web
-          sites still in their infancy. Various versions have evolved over the
-          years, sometimes by accident, sometimes on purpose (injected humour
-          and the like)..
-        </p>
-        <div class="progress">
-          <div class="progress-value"></div>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <script>
-    const accordions = document.querySelectorAll(".accordion");
-    let intervalId;
-    let timeoutId;
-    let initialIndex = 0;
-    let timer = 9000;
-    let isOccurredEvent = false;
+    <script>
+        const accordions = document.querySelectorAll(".accordion-item-header");
+        const externalImageContainer = document.querySelector(".external-image-container img");
+        let autoSwitchInterval; // Biến để lưu đối tượng interval
 
-    autoAnimateProgress(initialIndex);
+        // Sử lí sự kiện
+        accordions.forEach(item => {
+            item.addEventListener("click", (e) => {
+                toggleAccordion(item);
+                clearInterval(autoSwitchInterval); // Dừng bộ đếm khi người dùng thao tác
+                autoSwitchInterval = setInterval(() => {
+                    const activeItem = document.querySelector(".accordion-item.active");
+                    const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
+                    toggleAccordion(nextItem.querySelector(".accordion-item-header"));
+                }, 5000);
+            });
+        });
 
-    accordions.forEach((accordion, i) => {
-      const button = accordion.querySelector(".accordion_content");
-      button.addEventListener("click", function () {
-        toggle(i);
-      });
-    });
+        // Mặc định kích hoạt mục accordion đầu tiên
+        toggleAccordion(accordions[0]);
 
-    function toggle(currentIndex) {
-      accordions.forEach((accordion, previousIndex) => {
-        const description = accordion.querySelector(".accordion_description");
-        const progressBars = accordion.querySelector(".progress");
+        // Tự động active item mỗi 5 giây
+        autoSwitchInterval = setInterval(() => {
+            const activeItem = document.querySelector(".accordion-item.active");
+            const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
+            toggleAccordion(nextItem.querySelector(".accordion-item-header"));
+        }, 5000);
 
-        if (currentIndex !== previousIndex) {
-          removeCurrentAccordion(previousIndex);
-        } else {
-          description.classList.toggle("activeDes");
-          progressBars.classList.toggle("progressActive");
-          isOccurredEvent = true;
-          const nextIndex =
-            currentIndex >= accordions.length - 1 ? 0 : currentIndex + 1;
-          autoAnimateProgress(nextIndex,);
-        }
-      });
-    }
+        function toggleAccordion(item) {
+            const activeItem = document.querySelector(".accordion-item.active");
+            if (activeItem && activeItem !== item.parentElement) {
+                activeItem.classList.toggle("active");
+                activeItem.querySelector('.accordion-item-body').style.maxHeight = 0;
+                resetProgressBar(activeItem);
+            }
 
-    function removeCurrentAccordion(currentIndex) {
-      const description = accordions[currentIndex].querySelector(
-        ".accordion_description"
-      );
-      const progressBars =
-        accordions[currentIndex].querySelector(".progress");
+            item.parentElement.classList.toggle("active");
+            const accordionItemBody = item.parentElement.querySelector('.accordion-item-body');
+            const progressBar = accordionItemBody.querySelector('.progress-bar');
+            const accordionItemImage = item.parentElement.dataset.image;
 
-      description.classList.remove("activeDes");
-      progressBars.classList.remove("progressActive");
-    }
-
-    function autoAnimateProgress(index) {
-      clearInterval(intervalId);
-      clearTimeout(timeoutId);
-
-      intervalId = setInterval(() => {
-        if (isOccurredEvent) {
-          let previousIndex = index === 0 ? accordions.length : index;
-          accordions[previousIndex - 1]
-            .querySelector(".accordion_description")
-            .classList.remove("activeDes");
-          accordions[previousIndex - 1]
-            .querySelector(".progress")
-            .classList.remove("progressActive");
-
-          isOccurredEvent = false;
+            if (item.parentElement.classList.contains("active")) {
+                accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+                showImage(accordionItemImage);
+                resetProgressBar(item.parentElement);
+                startProgressBar(progressBar);
+            } else {
+                accordionItemBody.style.maxHeight = 0;
+                hideImage();
+            }
         }
 
-        const currentIndex = index;
-        const description = accordions[index].querySelector(
-          ".accordion_description"
-        );
-        const progressBars = accordions[index].querySelector(".progress");
-        description.classList.add("activeDes");
-        progressBars.classList.add("progressActive");
-        index++;
-        console.log(currentIndex, index);
-        // wait 9s setinter để ko bị remove
-        setTimeout(() => {
-          if (currentIndex !== index) {
-            removeCurrentAccordion(currentIndex);
-          }
-          if (index >= accordions.length) index = 0;
-        }, timer);
+        function showImage(imageUrl) {
+            externalImageContainer.style.opacity = 0;
+            setTimeout(function () {
+                externalImageContainer.src = imageUrl;
+                externalImageContainer.style = 'opacity: 1; visibility:visible ';
+            }, 300);
+        }
 
-      }, timer);
-    }
+        function hideImage() {
+            externalImageContainer.style.opacity = 0;
+            setTimeout(function () {
+                externalImageContainer.src = "https://imed.com.vn/wp-content/uploads/2024/01/image-34.jpeg";
+                externalImageContainer.style.opacity = 1;
+            }, 300);
+        }
 
+        function resetProgressBar(item) {
+            const progressBar = item.querySelector('.progress-bar');
+            progressBar.style.width = '0';
+            progressBar.style.animation = 'none'; // Dừng animation
+        }
 
+        function startProgressBar(progressBar) {
+            progressBar.style.width = '0'; // Reset progress bar width to 0
+            progressBar.style.animation = 'progress 5s linear infinite'; // Restart the animation
+        }
 
-  </script>
+    </script>
+
 </body>
 
 </html>
