@@ -137,7 +137,9 @@
             <div class="accordion-item"
                 data-image="https://imed.com.vn/wp-content/uploads/2024/01/Giai-phap-chuan-doan-va-dieu-tri-ung-thu.jpeg">
                 <div class="accordion-item-header">
+                    
                     What is Web Development?
+                    
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
@@ -146,9 +148,9 @@
                         development, client-side/server-side scripting and network security configuration, among other
                         tasks.
                     </div>
-                    <!-- <div class="progress-bar-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar"></div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
 
@@ -162,9 +164,9 @@
                         websites. It includes web graphic design, interface design, authoring, including standardized
                         code and proprietary software, user experience design, and search engine optimization.
                     </div>
-                    <!-- <div class="progress-bar-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar"></div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
 
@@ -178,9 +180,9 @@
                         websites. It includes web graphic design, interface design, authoring, including standardized
                         code and proprietary software, user experience design, and search engine optimization.
                     </div>
-                    <!-- <div class="progress-bar-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar"></div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,7 +192,7 @@
     <script>
         const accordions = document.querySelectorAll(".accordion-item-header");
         const externalImageContainer = document.querySelector(".external-image-container img");
-        let autoSwitchInterval; // Biến để lưu đối tượng interval
+        let autoSwitchInterval; 
         let timer = 5000
         // Sử lí sự kiện
         accordions.forEach(item => {
@@ -205,8 +207,9 @@
                         const activeItem = document.querySelector(".accordion-item.active");
                         const nextItem = activeItem.nextElementSibling || accordions[0].parentElement;
                         toggleAccordion(nextItem.querySelector(".accordion-item-header"));
-                    }, timer);
+                    }, timer);     
                 }
+                
             });
         });
 
@@ -221,17 +224,19 @@
         }, timer);
 
         function toggleAccordion(item) {
-            const activeItem = document.querySelector(".accordion-item.active");
+            const activeItems = document.querySelectorAll(".accordion-item.active");
 
             // Kiểm tra xem item được click có đang active không
-            if (activeItem && activeItem !== item.parentElement) {
-                activeItem.classList.toggle("active");
-                activeItem.querySelector('.accordion-item-body').style.maxHeight = 0;
-                // resetProgressBar(activeItem);
-            }
+            activeItems.forEach(activeItem => {
+                if (activeItem && activeItem !== item.parentElement) {
+                    activeItem.classList.toggle("active");
+                    activeItem.querySelector('.accordion-item-body').style.maxHeight = 0;
+                    resetProgressBar(activeItem);
+                }
+            })
+
 
             const isItemActive = item.parentElement.classList.contains("active");
-
             // Nếu item không active thì mới thực hiện các thay đổi
             if (!isItemActive) {
                 item.parentElement.classList.toggle("active");
@@ -242,8 +247,8 @@
                 if (item.parentElement.classList.contains("active")) {
                     accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
                     showImage(accordionItemImage);
-                    // resetProgressBar(item.parentElement);
-                    // startProgressBar(progressBar);
+                    resetProgressBar(item.parentElement);
+                    startProgressBar(progressBar);
                 } else {
                     accordionItemBody.style.maxHeight = 0;
                     hideImage();
@@ -268,16 +273,16 @@
             }, 100);
         }
 
-        // function resetProgressBar(item) {
-        //     const progressBar = item.querySelector('.progress-bar');
-        //     progressBar.style.width = '0';
-        //     progressBar.style.animation = 'none'; // Dừng animation
-        // }
+        function resetProgressBar(item) {
+            const progressBar = item.querySelector('.progress-bar');
+            progressBar.style.width = '0';
+            progressBar.style.animation = 'none'; // Dừng animation
+        }
 
-        // function startProgressBar(progressBar) {
-        //     progressBar.style.width = '0'; // Reset progress bar width to 0
-        //     progressBar.style.animation = 'progress 5s linear infinite'; // Restart the animation
-        // }
+        function startProgressBar(progressBar) {
+            progressBar.style.width = '0'; // Reset progress bar width to 0
+            progressBar.style.animation = 'progress 5s linear infinite'; // Restart the animation
+        }
 
     </script>
 
